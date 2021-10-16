@@ -56,18 +56,18 @@ function promptUser() {
             name: "id",
             message: "What is the employee's ID number?"
         },
-        {
-        type: "text",
-        name: "id",
-        message: "What is the employee's email?"
-        }])
+            {
+            type: "text",
+            name: "email",
+            message: "What is the employee's email?"
+            }])
         //next to for roles, if statements? .then if role === employee? Push answers to array
     .then(({employee, id, email, role}) => {
             if (role === "Manager") {
                 return inquirer
                 .prompt ([{
                     type: "text",
-                    name: "office",
+                    name: "officeNum",
                     message: "What is your office number?"
                 },
                 {
