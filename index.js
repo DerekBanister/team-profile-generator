@@ -30,6 +30,7 @@ const employee = require('./lib/employee');
 const manager = require('./lib/manager');
 const engineer = require('./lib/engineer');
 const intern = require('./lib/intern');
+const fs = require("fs");
 
 let managerArr = [];
 let engineerArr = [];
@@ -133,4 +134,38 @@ function promptUser() {
 //intern isnt returning the prompt if selected. nvm figured it out
 //need to create constructors for each role
 }
-promptUser();
+function init () {
+    promptUser()
+    .then(employeeArray => {
+        console.log(employeeArray)
+        const markup = `
+     <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+<div class="person">
+<div class="jumbotron text-center jumbotron-fluid">
+    <h1>Team Profile Generator!</h1>
+</div>
+<div class="card">
+
+<div class="card-body"></div>
+<hr>
+</div>
+</body>
+</html>
+`;
+
+            fs.writeFile("index.html", (markup), (err) => 
+            err ? console.error(err) : console.log("Your team has been assembled!"))
+    })
+}
+
+init();
