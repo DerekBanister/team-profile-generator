@@ -44,7 +44,8 @@ function promptUser() {
             type: "list",
             name: "role",
             message: "What is the employee's role?",
-            choices: ["Manager", "Engineer", "Intern"]
+            choices: ["Manager", "Engineer", "Intern"],
+            default: "Manager"
         },
         {
             type: "text",
@@ -76,9 +77,9 @@ function promptUser() {
                     message: "Would you like to add another employee to your team?",
                     default: false
                 }])
-                .then(({office, nextEntry}) => {
-                        //  managerArr.push(new manager(employee, id, email, office))
-                        //  console.log(managerArr);
+                .then(({officeNum, nextEntry}) => {
+                         managerArr.push(new manager(employee, id, email, officeNum))
+                         console.log(managerArr);
                         //prompts working if nextEntry, managerArr having issues. Havent created manager constructor
                     if (nextEntry){
                         return promptUser();
@@ -98,8 +99,8 @@ function promptUser() {
                         default: false
                     }])
                     .then(({github, nextEntry}) => {
-                        // engineer.push(new engineer(employee, id, email, github))
-                        // console.log(engineerArr);
+                        engineerArr.push(new engineer(employee, id, email, github))
+                        console.log(engineerArr);
                         if (nextEntry){
                             return promptUser();
                         }
@@ -120,8 +121,8 @@ function promptUser() {
                     }
                 ])
                     .then(({internSchool, nextEntry}) => {
-                        // intern.push(new intern(employee, id, email, school))
-                        // console.log(internArr);
+                        internArr.push(new intern(employee, id, email, school))
+                        console.log(internArr);
                         if (nextEntry){
                             return promptUser();
                         }

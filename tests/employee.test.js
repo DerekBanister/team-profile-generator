@@ -15,25 +15,25 @@ test("create employee object", () => {
 test("get employee name", () => {
     const employeeObj = new employee("Farley Chicken", "1", "bacon@chicken.net");
 
-    expect(employeeObj.getName()).toEqual(stringContaining("Farley Chicken"));
+    expect(employeeObj.getName()).toEqual(expect.stringContaining("Farley Chicken"));
 })
 
 test("get employee ID", () => {
     const employeeObj = new employee("Farley Chicken", "1", "bacon@chicken.net");
 
-    expect(employeeObj.getId()).toEqual(stringContaining("1"));
+    expect(employeeObj.getId()).toEqual(expect.stringContaining("1"));
 })
 
 test("get employee email", () => {
     const employeeObj = new employee("Farley Chicken", "1", "bacon@chicken.net");
 
-    expect(employeeObj.getEmail()).toEqual(stringContaining("bacon@chicken.net"));
+    expect(employeeObj.getEmail()).toEqual(expect.stringContaining("bacon@chicken.net"));
 })
 
 test("get employee role", () => {
     const employeeObj = new employee("Farley Chicken", "1", "bacon@chicken.net");
 
-    expect(employeeObj.getRole()).toEqual(stringContaining("Employee"));
+    expect(employeeObj.getRole()).toEqual(expect.stringContaining("Employee"));
 })
 
 //not sure if these are correct, time will tell when I test later
