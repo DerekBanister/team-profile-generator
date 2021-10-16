@@ -31,12 +31,12 @@ const manager = require('./lib/manager');
 const engineer = require('./lib/engineer');
 const intern = require('./lib/intern');
 
-let manager = [];
-let engineer = [];
-let intern = [];
+let managerArr = [];
+let engineerArr = [];
+let internArr = [];
 let employeeArray = {manager, engineer, intern};
 
-function PromptUser() {
+function promptUser() {
 
     return inquirer
     .prompt([
@@ -53,32 +53,83 @@ function PromptUser() {
         },
         {
             type: "text",
-            name: "employee",
-            message: "What is the employee's name?"
+            name: "id",
+            message: "What is the employee's ID number?"
         },
         {
         type: "text",
         name: "id",
         message: "What is the employee's email?"
         }])
+        //next to for roles, if statements? .then if role === employee? Push answers to array
     .then(({employee, id, email, role}) => {
             if (role === "Manager") {
                 return inquirer
                 .prompt ([{
                     type: "text",
                     name: "office",
-                    message: "What is the manager's office number?"
+                    message: "What is your office number?"
                 },
                 {
                     type: "confirm",
                     name: "nextEntry",
                     message: "Would you like to add another employee to your team?",
                     default: false
-                }
+                }])
+                .then(({office, nextEntry}) => {
+                        //  managerArr.push(new manager(employee, id, email, office))
+                        //  console.log(managerArr);
+                        //prompts working if nextEntry, managerArr having issues. Havent created manager constructor
+                    if (nextEntry){
+                        return promptUser();
+                    }
+                })
+            } else if (role === "Engineer") {
+                return inquirer
+                    .prompt([{
+                        type: "text",
+                        name: "github",
+                        message: "What is your Engineer's Github username?"
+                    },
+                    {
+                        type: "confirm",
+                        name: "nextEntry",
+                        message: "Would you like to add another employee to your team?",
+                        default: false
+                    }])
+                    .then(({github, nextEntry}) => {
+                        // engineer.push(new engineer(employee, id, email, github))
+                        // console.log(engineerArr);
+                        if (nextEntry){
+                            return promptUser();
+                        }
+                    })
+                
+            } else if (role === "Intern"){
+                return inquirer
+                    .prompt([{
+                        type: "text",
+                        name: "internSchool",
+                        message: "What is your intern's school?"
+                    },
+                    {
+                        type: "confirm",
+                        name: "nextEntry",
+                        message: "Would you like to add another employee to your team?",
+                        default: false
+                    }
                 ])
+                    .then(({internSchool, nextEntry}) => {
+                        // intern.push(new intern(employee, id, email, school))
+                        // console.log(internArr);
+                        if (nextEntry){
+                            return promptUser();
+                        }
+                    })
             }
     })
 
-//next to for roles, if statements? .then if role === employee? Push answers to array
-
+//intern isnt returning the prompt if selected. nvm figured it out
+//need to create constructors for each role
 }
+promptUser();
