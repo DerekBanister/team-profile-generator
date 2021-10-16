@@ -26,7 +26,59 @@
 //for intern school
 
 const inquirer = require('inquirer');
-const Employee = require('./lib/Employee');
-const Manager = require('./lib/Manager');
-const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern');
+const employee = require('./lib/employee');
+const manager = require('./lib/manager');
+const engineer = require('./lib/engineer');
+const intern = require('./lib/intern');
+
+let manager = [];
+let engineer = [];
+let intern = [];
+let employeeArray = {manager, engineer, intern};
+
+function PromptUser() {
+
+    return inquirer
+    .prompt([
+        {
+            type: "list",
+            name: "role",
+            message: "What is the employee's role?",
+            choices: ["Manager", "Engineer", "Intern"]
+        },
+        {
+            type: "text",
+            name: "employee",
+            message: "What is the employee's name?"
+        },
+        {
+            type: "text",
+            name: "employee",
+            message: "What is the employee's name?"
+        },
+        {
+        type: "text",
+        name: "id",
+        message: "What is the employee's email?"
+        }])
+    .then(({employee, id, email, role}) => {
+            if (role === "Manager") {
+                return inquirer
+                .prompt ([{
+                    type: "text",
+                    name: "office",
+                    message: "What is the manager's office number?"
+                },
+                {
+                    type: "confirm",
+                    name: "nextEntry",
+                    message: "Would you like to add another employee to your team?",
+                    default: false
+                }
+                ])
+            }
+    })
+
+//next to for roles, if statements? .then if role === employee? Push answers to array
+
+}
