@@ -110,7 +110,7 @@ function promptUser() {
                 return inquirer
                     .prompt([{
                         type: "text",
-                        name: "internSchool",
+                        name: "school",
                         message: "What is your intern's school?"
                     },
                     {
@@ -120,7 +120,7 @@ function promptUser() {
                         default: false
                     }
                 ])
-                    .then(({internSchool, nextEntry}) => {
+                    .then(({school, nextEntry}) => {
                         internArr.push(new intern(employee, id, email, school))
                         console.log(internArr);
                         if (nextEntry){
