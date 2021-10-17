@@ -30,13 +30,13 @@ const employee = require('./lib/employee');
 const manager = require('./lib/manager');
 const engineer = require('./lib/engineer');
 const intern = require('./lib/intern');
-const fs = require("fs");
-const generateHtml = require ("./lib/generateHtml")
+const fs = require('fs');
+const generateHtml = require ('./lib/generateHtml')
 
 let managerArr = [];
 let engineerArr = [];
 let internArr = [];
-let employeeArray = {manager, engineer, intern};
+let employeeArray = {managerArr, engineerArr, internArr};
 
 function promptUser() {
 
@@ -47,7 +47,6 @@ function promptUser() {
             name: "role",
             message: "What is the employee's role?",
             choices: ["Manager", "Engineer", "Intern"],
-            default: "Manager"
         },
         {
             type: "text",
@@ -131,18 +130,24 @@ function promptUser() {
                     })
             }
     })
-
-//intern isnt returning the prompt if selected. nvm figured it out
-//need to create constructors for each role
 }
-function init () {
-    promptUser()
-    .then(teamData => {
-        //console.log(teamData)
-            fs.writeFile("index.html", generateHtml(employeeArray), (err) => 
-            err ? console.error(err) : console.log("Your team has been assembled!"))
+
+const writeFile = fileContent => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('index.html', fileContent, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(console.log("Your team has been assembled in the index.html file"))
+        })
     })
 }
-
-init();
-
+//runs prompts, generates html, then calls writeFile to append to index.html page
+promptUser()
+.then (team => {
+    return generateHtml(employeeArray)
+})
+.then(pageHTML => {
+    return writeFile(pageHTML)
+})
